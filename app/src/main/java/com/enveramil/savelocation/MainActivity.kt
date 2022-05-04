@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,6 +13,8 @@ import com.enveramil.savelocation.databinding.ActivityMainBinding
 import com.enveramil.savelocation.databinding.ActivityMapsBinding
 import com.enveramil.savelocation.model.Location
 import com.enveramil.savelocation.roomdb.LocationDatabase
+import com.google.android.material.bottomnavigation.BottomNavigationItemView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -28,6 +31,17 @@ class MainActivity : AppCompatActivity() {
         compositeDisposable.add(
             dao.getAllData().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(this::handleResponse)
         )
+        //binding.navBottomBar.showBadge(R.id.home,100)
+        //binding.navBottomBar.showBadge(R.id.location,10)
+        binding.navBottomBar.setOnItemSelectedListener {
+
+            if (R.id.location == it) {
+                val intent = Intent(this, MapsActivity::class.java)
+                intent.putExtra("info","new")
+                startActivity(intent)
+            }
+        }
+
     }
 
     fun handleResponse(list : List<Location>){
@@ -52,9 +66,17 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.add_location){
             val intent = Intent(this,MapsActivity::class.java)
+            intent.putExtra("info","new")
             startActivity(intent)
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    fun goToAddNewPlace(item: MenuItem){
+        if (binding.navBottomBar.id == R.id.location){
+            val intent = Intent(this,MapsActivity::class.java)
+            startActivity(intent)
+        }
     }
 
 }

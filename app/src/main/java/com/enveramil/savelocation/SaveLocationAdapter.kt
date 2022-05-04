@@ -20,8 +20,10 @@ class SaveLocationAdapter(var list : List<Location>) : RecyclerView.Adapter<Save
 
     override fun onBindViewHolder(holder: SaveLocationHolder, position: Int) {
         holder.binding.recyclerRow.text = list.get(position).locationName
-        holder.itemView.setOnClickListener {
+        holder.binding.cardView.setOnClickListener {
             val intent = Intent(holder.itemView.context,MapsActivity::class.java)
+            intent.putExtra("selectedPlace",list.get(position))
+            intent.putExtra("info","old")
             holder.itemView.context.startActivity(intent)
         }
     }

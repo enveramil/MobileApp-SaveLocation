@@ -3,6 +3,7 @@ package com.enveramil.savelocation.model
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.io.Serializable
 
 @Entity
 class Location(
@@ -13,7 +14,7 @@ class Location(
     var latitude : Double,
 
     @ColumnInfo(name = "Longitude")
-    var longitude : Double) {
+    var longitude : Double)  : Serializable{
 
     // Body kısmında id bilgisini göstereceğiz
     @PrimaryKey(autoGenerate = true)
