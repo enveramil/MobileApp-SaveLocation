@@ -47,8 +47,9 @@
                 android:background="@drawable/custom_edit_text"
                 android:backgroundTint="#DAD5D5"
                 android:drawableStart="@drawable/ic_baseline_add_location_24"
-                android:hint="Enter Place Name"
                 android:drawablePadding="3dp"
+                android:maxLength="50"
+                android:hint="Enter Place Name"
                 android:textSize="30sp"
                 tools:layout_editor_absoluteY="448dp" />
 

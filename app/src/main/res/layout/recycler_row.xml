@@ -25,17 +25,20 @@
             android:id="@+id/recyclerRow"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:gravity="center"
-            android:paddingStart="5dp"
+            android:layout_gravity="center"
             android:text="Save Location"
             android:textColor="@color/white"
+            android:drawableRight="@drawable/ic_baseline_arrow_forward_24"
             android:textSize="25sp"
+            android:paddingEnd="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
         </TextView>
+
+
     </androidx.cardview.widget.CardView>
 
 

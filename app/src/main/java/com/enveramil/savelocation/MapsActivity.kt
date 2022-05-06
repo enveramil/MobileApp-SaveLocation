@@ -34,6 +34,7 @@ import com.enveramil.savelocation.roomdb.LocationDatabase
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.material.snackbar.Snackbar
+import com.ismaeldivita.chipnavigation.ChipNavigationBar
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -101,8 +102,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapLon
         val intent = intent
         val info = intent.getStringExtra("info")
         if (info == "new"){
-            binding.button.visibility = View.VISIBLE
             binding.button2.visibility = View.GONE
+            binding.button.visibility = View.VISIBLE
+
 
             locationManager = this.getSystemService(LOCATION_SERVICE) as LocationManager
 
@@ -208,6 +210,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapLon
         return BitmapDescriptorFactory.fromBitmap(bitmap)
     }
 
+    private fun handleResponse(){
+        val intent = Intent(this,MainActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        startActivity(intent)
+    }
+
     fun saveButton(view: View){
 
         if (selectedLatitude != null && selectedLongitude != null){
@@ -221,11 +229,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapLon
             binding.textView.text.clear()
         }
 
-    }
-    fun handleResponse(){
-        val intent = Intent(this,MainActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        startActivity(intent)
     }
 
     fun deleteButton(view: View){

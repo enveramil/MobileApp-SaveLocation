@@ -2,12 +2,18 @@ package com.enveramil.savelocation
 
 import android.content.Intent
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.enveramil.savelocation.databinding.RecyclerRowBinding
 import com.enveramil.savelocation.model.Location
 
 class SaveLocationAdapter(var list : List<Location>) : RecyclerView.Adapter<SaveLocationAdapter.SaveLocationHolder>() {
+    private lateinit var animation : Animation
+    var lastPosition = -1
 
     class SaveLocationHolder(var binding: RecyclerRowBinding) : RecyclerView.ViewHolder(binding.root) {
 
@@ -26,6 +32,15 @@ class SaveLocationAdapter(var list : List<Location>) : RecyclerView.Adapter<Save
             intent.putExtra("info","old")
             holder.itemView.context.startActivity(intent)
         }
+
+        if (holder.adapterPosition > lastPosition){
+            animation = AnimationUtils.loadAnimation(holder.itemView.context,R.anim.slide_in_row)
+            holder.itemView.startAnimation(animation)
+            lastPosition = holder.adapterPosition
+
+        }
+
+
     }
 
     override fun getItemCount(): Int {
